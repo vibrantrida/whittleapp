@@ -1,5 +1,6 @@
 'use strict'
 
+require('dotenv').config()
 import { app, protocol, BrowserWindow } from 'electron'
 import {
   createProtocol,
@@ -14,13 +15,19 @@ let win
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800,
-    height: 600,
+  win = new BrowserWindow({
+    titleBarStyle: 'hiddenInset',
+    alwaysOnTop: true,
+    resizable: false,
+    frame: false,
+    width: 300,
+    height: 340,
     webPreferences: {
       nodeIntegration: true
-    } })
+    }
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
