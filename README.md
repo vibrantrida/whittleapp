@@ -1,5 +1,7 @@
 # whittleapp
 
+Resize, slice, and optimize your webcomic strip with just one drop.
+
 ## Project setup
 ```
 npm install
