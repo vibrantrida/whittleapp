@@ -1,11 +1,12 @@
 'use strict'
 
-require('dotenv').config()
 import { app, protocol, BrowserWindow } from 'electron'
 import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+
+require('dotenv').config()
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -15,7 +16,7 @@ let win
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
-function createWindow() {
+function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
     titleBarStyle: 'hiddenInset',
