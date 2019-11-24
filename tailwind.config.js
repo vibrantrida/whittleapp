@@ -2,6 +2,10 @@ module.exports = {
   theme: {
     extend: {}
   },
-  variants: {},
+  variants: {
+    borderColor: ['hover'],
+    borderStyle: ['hover'],
+    borderWidth: ['hover']
+  },
   plugins: []
 }

@@ -1,17 +1,17 @@
 <template>
-  <div id="app" class="bg-gray-100 h-screen">
-    <div style="-webkit-app-region: drag;" class="absolute w-full p-12"></div>
-    <Dropzone></Dropzone>
+  <div id="app" class="h-screen">
+    <div style="-webkit-app-region: drag;" class="absolute w-full p-4"></div>
+    <Tray />
   </div>
 </template>
 
 <script>
-import Dropzone from './components/Dropzone.vue'
+import Tray from './components/Tray.vue'
 
 export default {
   name: 'app',
   components: {
-    Dropzone
+    Tray
   }
 }
 </script>
