@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-around items-center m-auto" style="width: calc(100% - 32px); height: calc(100% - 32px);">
-    <div @dragover.prevent @drop="drop($event)" class="flex flex-col justify-center items-stretch py-10 w-full h-full border-4 border-gray-300 hover:border-gray-400 border-dashed hover:border-solid rounded">
+    <div @dragover.prevent @drop="drop($event)" class="flex flex-col justify-center items-stretch py-10 w-full h-full" :class="{'border-4 border-gray-300 border-dashed hover:border-solid rounded':(state === 0) || (state === 2) || (state === 3)}">
       <Message :state="state" />
     </div>
   </div>
@@ -27,9 +27,7 @@ export default {
     }
   },
   methods: {
-    async generateTapas () {
-      let maxWidth = 940
-      let maxHeight = 4000
+    async generateStrip (maxWidth, maxHeight, extName, outDir) {
       await jimp.read(this.filePath)
         .then(image => {
           if (image.bitmap.width > maxWidth) {
@@ -42,41 +40,11 @@ export default {
             for (let i = 0; i < sliceCount; i++) {
               slices[i] = image.clone()
               slices[i].crop(0, lastY, image.bitmap.width, image.bitmap.height / sliceCount)
-              slices[i].write(`${path.dirname(this.filePath) + '/tapas/' + path.basename(this.filePath, path.extname(this.filePath))}_${i}.${path.extname(this.filePath)}`)
+              slices[i].write(`${path.dirname(this.filePath)}/${outDir}/${path.basename(this.filePath, path.extname(this.filePath))}_${i}${extName}`)
               lastY += slices[i].bitmap.height
             }
           } else {
-            image.write(`${path.dirname(this.filePath) + '/tapas/' + path.basename(this.filePath)}`)
-          }
-        })
-        .catch(err => {
-          if (err) {
-            this.state = 3
-            console.error(err)
-          }
-        })
-      return true
-    },
-    async generateWebtoons () {
-      let maxWidth = 800
-      let maxHeight = 1280
-      await jimp.read(this.filePath)
-        .then(image => {
-          if (image.bitmap.width > maxWidth) {
-            image.resize(maxWidth, jimp.AUTO)
-          }
-          if (image.bitmap.height > maxHeight) {
-            let sliceCount = Math.ceil(image.bitmap.height / maxHeight)
-            let slices = []
-            let lastY = 0
-            for (let i = 0; i < sliceCount; i++) {
-              slices[i] = image.clone()
-              slices[i].crop(0, lastY, image.bitmap.width, image.bitmap.height / sliceCount)
-              slices[i].write(`${path.dirname(this.filePath) + '/webtoons/' + path.basename(this.filePath, path.extname(this.filePath))}_${i}.jpg`)
-              lastY += slices[i].bitmap.height
-            }
-          } else {
-            image.write(`${path.dirname(this.filePath) + '/webtoons/' + path.extname(this.filePath, path.extname(this.filePath))}.jpg`)
+            image.write(`${path.dirname(this.filePath)}/${outDir}/${path.basename(this.filePath, path.extname(this.filePath))}${extName}`)
           }
         })
         .catch(err => {
@@ -97,11 +65,18 @@ export default {
         this.state = 1
         this.filePath = _file.path
 
-        let tapas = await this.generateTapas()
-        let webtoons = await this.generateWebtoons()
+        let isPNG = path.extname(this.filePath) === '.png'
+        let isJPEG = (path.extname(this.filePath) === '.jpg') || (path.extname(this.filePath) === '.jpeg')
 
-        if (tapas && webtoons) {
-          this.state = 2
+        if (isPNG || isJPEG) {
+          let tapas = await this.generateStrip(940, 4000, '.png', 'tapas')
+          let webtoons = await this.generateStrip(800, 1280, '.jpg', 'webtoons')
+
+          if (tapas && webtoons) {
+            this.state = 2
+          }
+        } else {
+          this.state = 3
         }
       }
     }
