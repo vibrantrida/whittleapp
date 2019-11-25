@@ -50,7 +50,6 @@ export default {
         .catch(err => {
           if (err) {
             this.state = 3
-            console.error(err)
           }
         })
       return true
