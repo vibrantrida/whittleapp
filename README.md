@@ -1,6 +1,6 @@
 # whittleapp
 
-Resize, slice, and optimize your webcomic strip with just one drop.
+Resize and slice your webcomic strip with just one drop.
 
 ## Project setup
 ```
