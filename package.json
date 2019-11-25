@@ -1,7 +1,8 @@
 {
   "name": "whittleapp",
-  "version": "0.1.0",
-  "description": "Resize, slice, and optimize your webcomic strip with just one drop",
+  "version": "1.0.0",
+  "description": "Resize and slice your webcomic strip with just one drop",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/vibrantrida/whittleapp.git"
@@ -20,8 +21,6 @@
   "dependencies": {
     "core-js": "^3.3.2",
     "jimp": "^0.8.5",
-    "mozjpeg": "^6.0.1",
-    "pngquant-bin": "^5.0.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
