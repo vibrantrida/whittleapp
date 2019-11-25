@@ -21,12 +21,12 @@ function createWindow () {
   win = new BrowserWindow({
     titleBarStyle: 'hiddenInset',
     alwaysOnTop: true,
-    resizable: false,
     frame: false,
     width: 300,
     height: 340,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
 
