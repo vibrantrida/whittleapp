@@ -20,6 +20,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.3.2",
+    "electron-updater": "^4.2.0",
     "jimp": "^0.6.4",
     "vue": "^2.6.10"
   },
