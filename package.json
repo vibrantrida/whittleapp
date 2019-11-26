@@ -20,7 +20,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.3.2",
-    "jimp": "^0.8.5",
+    "jimp": "^0.6.4",
     "vue": "^2.6.10"
   },
   "devDependencies": {
