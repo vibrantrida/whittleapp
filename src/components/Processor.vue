@@ -69,7 +69,7 @@ export default {
 
         if (isPNG || isJPEG) {
           let tapas = await this.generateStrip(940, 4000, '.png', 'tapas')
-          let webtoons = await this.generateStrip(800, 1280, '.jpg', 'webtoons')
+          let webtoons = await this.generateStrip(800, 1280, '.png', 'webtoons')
           let smackjeeves = await this.generateStrip(690, 1280, '.png', 'smackjeeves')
 
           if (tapas && webtoons && smackjeeves) {
